@@ -1,4 +1,6 @@
 from fastapi import FastAPI
+from scanner import scan_text
+from risk_engine import calculate_risk
 
 app = FastAPI(
     title="LeakGuard AI",
@@ -12,8 +14,16 @@ def home():
         "status": "running"
     }
 
-@app.get("/health")
-def health():
+@app.post("/scan")
+def scan(data: dict):
+
+    text = data.get("text", "")
+
+    findings = scan_text(text)
+
+    risk = calculate_risk(findings)
+
     return {
-        "status": "healthy"
+        "findings": findings,
+        "risk": risk
     }
