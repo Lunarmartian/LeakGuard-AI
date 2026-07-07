@@ -213,6 +213,117 @@ header p {
     margin-bottom: 20px;
 }
 
+.breach-lookup {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.breach-lookup h2 {
+    margin-top: 0;
+}
+
+.breach-input-row {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.breach-input-row input {
+    flex: 1;
+    min-width: 220px;
+    padding: 12px 16px;
+    border-radius: 8px;
+    border: 1px solid #30363d;
+    background: #0d1117;
+    color: white;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.breach-input-row input:focus {
+    outline: none;
+    border-color: #58a6ff;
+    box-shadow: 0 0 0 3px rgba(88, 166, 255, 0.2);
+}
+
+.breach-input-row button {
+    padding: 12px 24px;
+    border-radius: 8px;
+    background: linear-gradient(120deg, #db6d28, #f0883e);
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.breach-input-row button:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(240, 136, 62, 0.35);
+}
+
+.breach-input-row button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.breach-summary {
+    margin: 16px 0 0;
+    font-weight: 600;
+}
+
+.breach-summary.critical {
+    color: #ff7b72;
+}
+
+.breach-summary.safe {
+    color: #3fb950;
+}
+
+.breach-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 12px;
+}
+
+.breach-card {
+    background: #0d1117;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    padding: 12px 14px;
+}
+
+.breach-card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.breach-date {
+    color: #8b949e;
+    font-size: 0.85rem;
+}
+
+.breach-classes {
+    margin-top: 8px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.breach-class-tag {
+    background: #21262d;
+    color: #c9d1d9;
+    border-radius: 999px;
+    padding: 3px 10px;
+    font-size: 0.75rem;
+}
+
 .scan-button {
     padding: 12px 24px;
     border-radius: 10px;
