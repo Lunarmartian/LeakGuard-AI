@@ -1,6 +1,9 @@
 import RiskCard from './RiskCard.jsx'
 import UploadPanel from './UploadPanel.jsx'
 import FindingsTable from './FindingsTable.jsx'
+import CategoryFilter from './CategoryFilter.jsx'
+
+const SEVERITIES = ['All Risks', 'Low', 'Medium', 'High', 'Critical']
 
 function totalCount(findings) {
   return findings.reduce((sum, finding) => sum + finding.count, 0)
@@ -12,6 +15,8 @@ export default function Dashboard({
   filesScanned,
   severityFilter,
   setSeverityFilter,
+  categoryFilter,
+  setCategoryFilter,
   scanText,
   setScanText,
   onScan,
@@ -22,30 +27,42 @@ export default function Dashboard({
   return (
     <>
       <div className="stats">
-        <RiskCard title="Total Findings" value={totalCount(findings)} />
-        <RiskCard title="Risk Score" value={risk.score} />
+        <RiskCard icon="📊" title="Total Findings" value={totalCount(findings)} />
+        <RiskCard icon="📈" title="Risk Score" value={risk.score} />
         <RiskCard
+          icon="🚨"
           title="Risk Level"
           value={risk.risk}
           critical={risk.risk === 'CRITICAL'}
         />
-        <RiskCard title="Files Scanned" value={filesScanned} />
+        <RiskCard icon="📁" title="Files Scanned" value={filesScanned} />
       </div>
 
-      <div className="controls">
-        <select
-          value={severityFilter}
-          onChange={(e) => setSeverityFilter(e.target.value)}
-        >
-          <option>All Risks</option>
-          <option>Low</option>
-          <option>Medium</option>
-          <option>High</option>
-          <option>Critical</option>
-        </select>
+      <section className="filters">
+        <h2>Search by Category</h2>
+        <CategoryFilter selected={categoryFilter} onSelect={setCategoryFilter} />
 
-        <button onClick={onScan} disabled={loading}>
-          {loading ? 'Scanning...' : 'Run Scan'}
+        <div className="severity-row">
+          {SEVERITIES.map((severity) => (
+            <button
+              key={severity}
+              type="button"
+              className={
+                severityFilter === severity
+                  ? `severity-pill active severity-${severity.toLowerCase().replace(' ', '-')}`
+                  : `severity-pill severity-${severity.toLowerCase().replace(' ', '-')}`
+              }
+              onClick={() => setSeverityFilter(severity)}
+            >
+              {severity}
+            </button>
+          ))}
+        </div>
+      </section>
+
+      <div className="controls">
+        <button onClick={onScan} disabled={loading} className="scan-button">
+          {loading ? 'Scanning...' : '🛡️ Run Scan'}
         </button>
       </div>
 
@@ -59,6 +76,7 @@ export default function Dashboard({
           findings={findings}
           searchTerm={searchTerm}
           severityFilter={severityFilter}
+          categoryFilter={categoryFilter}
         />
       </div>
     </>

@@ -7,6 +7,7 @@ const API_URL = 'http://localhost:8000'
 export default function App() {
   const [searchTerm, setSearchTerm] = useState('')
   const [severityFilter, setSeverityFilter] = useState('All Risks')
+  const [categoryFilter, setCategoryFilter] = useState('all')
   const [scanText, setScanText] = useState('')
   const [findings, setFindings] = useState([])
   const [risk, setRisk] = useState({ score: 0, risk: 'LOW' })
@@ -58,6 +59,8 @@ export default function App() {
           filesScanned={filesScanned}
           severityFilter={severityFilter}
           setSeverityFilter={setSeverityFilter}
+          categoryFilter={categoryFilter}
+          setCategoryFilter={setCategoryFilter}
           scanText={scanText}
           setScanText={setScanText}
           onScan={handleScan}
